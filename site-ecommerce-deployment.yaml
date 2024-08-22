@@ -15,5 +15,12 @@ spec:
       containers:
       - name: site-ecommerce
         image: localhost:5000/todo-app
+        volumeMounts:
+          - name: site-ecommerce-volume
+            mountPath: /etc/todos
         ports:
         - containerPort: 3000
+      volumes:
+        - name: site-ecommerce-volume
+          persistentVolumeClaim:
+            claimName: site-ecommerce-pvc
