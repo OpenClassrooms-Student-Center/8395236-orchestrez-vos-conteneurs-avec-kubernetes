@@ -15,6 +15,27 @@ spec:
       containers:
       - name: site-ecommerce
         image: localhost:5000/todo-app
+        env:
+        - name: MYSQL_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: site-ecommerce-configmap
+              key: MYSQL_HOST
+        - name: MYSQL_USER
+          valueFrom:
+            configMapKeyRef:
+              name: site-ecommerce-configmap
+              key: MYSQL_USER
+        - name: MYSQL_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: site-ecommerce-secret
+              key: MYSQL_PASSWORD
+        - name: MYSQL_DB
+          valueFrom:
+            configMapKeyRef:
+              name: site-ecommerce-configmap
+              key: MYSQL_DB
         volumeMounts:
           - name: site-ecommerce-volume
             mountPath: /etc/todos
